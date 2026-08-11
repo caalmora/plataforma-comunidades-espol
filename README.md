@@ -1,1 +1,0 @@
-# plataforma-comunidades-espol
