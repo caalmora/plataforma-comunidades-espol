@@ -1,0 +1,169 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    color: #222;
+}
+
+.navbar {
+    background: #003366;
+    color: white;
+    padding: 15px 0;
+}
+
+.navbar-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: white;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+}
+
+.card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.form-container {
+    max-width: 500px;
+    margin: 50px auto;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+button,
+.btn {
+    display: inline-block;
+
+    border: none;
+    border-radius: 5px;
+
+    padding: 10px 16px;
+
+    background: #0066cc;
+    color: white;
+
+    text-decoration: none;
+    cursor: pointer;
+}
+
+button:hover,
+.btn:hover {
+    opacity: 0.9;
+}
+
+.btn-danger {
+    background: #cc3333;
+}
+
+.btn-success {
+    background: #198754;
+}
+
+.btn-secondary {
+    background: #666;
+}
+
+.btn-logout {
+    background: #cc3333;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.alert {
+    padding: 12px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.alert-error {
+    background: #f8d7da;
+    color: #842029;
+}
+
+.alert-success {
+    background: #d1e7dd;
+    color: #0f5132;
+}
+
+.community-title {
+    margin-top: 0;
+}
+
+.publication {
+    border-left: 4px solid #0066cc;
+    padding-left: 15px;
+    margin-bottom: 20px;
+}
+
+.member {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.empty {
+    text-align: center;
+    padding: 30px;
+    color: #777;
+}
