@@ -25,39 +25,46 @@ Las comunidades estudiantiles de ESPOL usan medios dispersos (WhatsApp, Instagra
 
 ## Arquitectura y tecnologías
 
-- **Patrón:** MVC
+- **Patrón:** MVC (backend) + SPA desacoplada (frontend)
 - **Backend:** PHP 8.4 + Laravel 13, Eloquent ORM, Laravel Sanctum (autenticación por tokens)
 - **Base de datos:** MySQL (SQLite soportado para desarrollo local)
-- **Frontend:** Blade + HTML + CSS + JavaScript (fetch a la API interna)
+- **Frontend:** React 18 + Vite + Tailwind CSS, consumiendo la API mediante `fetch`
 - **API:** REST interna en formato JSON
 
 ## Estructura del repositorio
 
-El código de la aplicación Laravel se encuentra en la carpeta [`plataforma-comunidades-espol/`](plataforma-comunidades-espol/).
-
 ```
-plataforma-comunidades-espol/
+plataforma-comunidades-espol/                     # Backend Laravel
 ├── app/Http/Controllers/   # AuthController, CommunityController, PublicationController, JoinRequestController, MembershipController
 ├── app/Models/              # User, Community, Publication, JoinRequest, Membership
 ├── database/migrations/     # Esquema de la base de datos
-├── resources/views/         # Vistas Blade (login, registro, dashboard, comunidades, etc.)
 ├── routes/api.php           # Rutas de la API REST
-└── routes/web.php           # Rutas de las vistas
+└── routes/web.php           # Ruta raíz (responde JSON de estado)
+
+plataforma-comunidades-espol-frontend/frontend_js/ # Frontend React
+├── src/app/App.jsx          # Componentes y vistas de la aplicación
+├── src/app/api.js           # Cliente fetch hacia la API de Laravel
+├── src/styles/               # Tailwind + tokens de tema (theme.css)
+└── vite.config.js
 ```
 
 ## Instalación y ejecución local
 
+Se necesitan **dos servidores corriendo en paralelo** (backend y frontend), cada uno en su propia terminal.
+
+### 1. Backend (Laravel API)
+
 ```bash
 cd plataforma-comunidades-espol
 
-# 1. Instalar dependencias de PHP
+# Instalar dependencias de PHP
 composer install
 
-# 2. Configurar entorno
+# Configurar entorno
 cp .env.example .env
 php artisan key:generate
 
-# 3. Base de datos
+# Base de datos
 # Opción rápida con SQLite (valor por defecto en .env.example):
 touch database/database.sqlite
 php artisan migrate
@@ -66,14 +73,35 @@ php artisan migrate
 # y DB_PASSWORD en .env, y luego ejecuta:
 # php artisan migrate
 
-# 4. (Opcional) Datos de prueba
+# (Opcional) Datos de prueba
 php artisan db:seed
 
-# 5. Levantar el servidor
+# Levantar el servidor
 php artisan serve
 ```
 
-La aplicación quedará disponible en `http://127.0.0.1:8000`.
+El backend queda disponible en `http://127.0.0.1:8000` (la API vive bajo `http://127.0.0.1:8000/api`).
+
+### 2. Frontend (React + Vite)
+
+En otra terminal:
+
+```bash
+cd plataforma-comunidades-espol-frontend/frontend_js
+
+# Instalar dependencias de Node
+npm install
+
+# Configurar la URL de la API (por defecto apunta al backend local)
+cp .env.example .env
+
+# Levantar el servidor de desarrollo
+npm run dev
+```
+
+El frontend queda disponible en `http://127.0.0.1:5173` — es ahí donde se navega la aplicación (login, comunidades, publicaciones, etc.). Requiere que el backend esté corriendo simultáneamente.
+
+**Requisitos:** PHP 8.4 con extensión `xml` habilitada, Composer, Node.js (con npm), y MySQL si no se usa SQLite.
 
 ## Endpoints principales de la API
 
