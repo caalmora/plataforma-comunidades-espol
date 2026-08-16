@@ -113,18 +113,18 @@ function LoginPage({ onLogin, goRegister }) {
     const [showPass, setShowPass] = useState(false);
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
-    
     const validate = () => {
-    const e = {};
+        const e = {};
+        if (!email.trim()) {
+            e.email = "El correo es requerido.";
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            e.email = "Ingresa un correo válido.";
+        } else if (!email.toLowerCase().endsWith("@espol.edu.ec")) {
+            e.email = "Debes utilizar un correo @espol.edu.ec.";
+        }
 
-    if (!email.trim())
-        e.email = "El correo es requerido.";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
-        e.email = "Ingresa un correo válido.";
-    else if (!email.toLowerCase().endsWith("@espol.edu.ec"))
-        e.email = "Debes utilizar un correo @espol.edu.ec";
-    if (!pass)
-        e.pass = "La contraseña es requerida.";
+        if (!pass)
+            e.pass = "La contraseña es requerida.";
         return e;
     };
     const submit = async (e) => {
@@ -146,6 +146,8 @@ function LoginPage({ onLogin, goRegister }) {
             setLoading(false);
         }
     };
+    return (_jsxs("div", { className: "min-h-screen flex", style: { fontFamily: "'Inter', sans-serif" }, children: [_jsxs("div", { className: "hidden lg:flex flex-col justify-between w-[45%] bg-[#0b3d91] p-12 text-white", children: [_jsxs("div", { className: "flex items-center gap-3", children: [_jsx("div", { className: "w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center", children: _jsx(GraduationCap, { size: 22, className: "text-white" }) }), _jsxs("div", { children: [_jsx("p", { className: "text-xl font-bold", style: { fontFamily: "'Outfit', sans-serif" }, children: "ESPOL" }), _jsx("p", { className: "text-xs text-blue-200", children: "Escuela Superior Polit\u00E9cnica del Litoral" })] })] }), _jsxs("div", { children: [_jsxs("h1", { className: "text-4xl font-bold leading-tight mb-4", style: { fontFamily: "'Outfit', sans-serif" }, children: ["Gesti\u00F3n de", _jsx("br", {}), "Comunidades"] }), _jsx("p", { className: "text-blue-200 text-base leading-relaxed max-w-sm", children: "\u00DAnete a comunidades, publica contenido y gestiona tu propia comunidad, todo desde una sola plataforma." }), _jsx("div", { className: "mt-10 space-y-3", children: [
+                                ].map(f => (_jsxs("div", { className: "flex items-center gap-3 text-sm text-blue-100", children: [_jsx("div", { className: "w-7 h-7 rounded-lg bg-white/15 flex items-center justify-center shrink-0", children: _jsx(f.icon, { size: 14 }) }), f.text] }, f.text))) })] }), _jsx("p", { className: "text-xs text-blue-300", children: "\u00A9 2026 ESPOL \u2014 Sistema de Gesti\u00F3n de Comunidades" })] }), _jsx("div", { className: "flex-1 flex items-center justify-center bg-[#f4f7ff] p-6", children: _jsxs("div", { className: "w-full max-w-[400px]", children: [_jsxs("div", { className: "lg:hidden flex items-center gap-2.5 mb-8 justify-center", children: [_jsx("div", { className: "w-10 h-10 rounded-xl bg-[#0b3d91] flex items-center justify-center", children: _jsx(GraduationCap, { size: 20, className: "text-white" }) }), _jsxs("div", { children: [_jsx("p", { className: "text-xl font-bold text-[#0b3d91]", style: { fontFamily: "'Outfit', sans-serif" }, children: "ESPOL" }), _jsx("p", { className: "text-xs text-[#5a709a]", children: "Gesti\u00F3n de Comunidades" })] })] }), _jsxs(Card, { className: "p-8", children: [_jsx("h2", { className: "text-2xl font-bold text-[#0d1e4d] mb-1", style: { fontFamily: "'Outfit', sans-serif" }, children: "Iniciar sesi\u00F3n" }), _jsx("p", { className: "text-sm text-[#5a709a] mb-6", children: "Ingresa con tu cuenta institucional de ESPOL." }), errors.general && _jsxs("div", { className: "mb-4 flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700", children: [_jsx(AlertCircle, { size: 15, className: "shrink-0" }), errors.general] }), _jsxs("form", { onSubmit: submit, className: "space-y-4", children: [_jsx(FieldWrap, { label: "Correo electr\u00F3nico", error: errors.email, children: _jsx(Inp, { type: "email", placeholder: "tu.nombre@espol.edu.ec", value: email, onChange: e => { setEmail(e.target.value); setErrors({}); } }) }), _jsx(FieldWrap, { label: "Contrase\u00F1a", error: errors.pass, children: _jsxs("div", { className: "relative", children: [_jsx(Inp, { type: showPass ? "text" : "password", placeholder: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022", value: pass, onChange: e => { setPass(e.target.value); setErrors({}); }, className: "pr-10" }), _jsx("button", { type: "button", onClick: () => setShowPass(v => !v), className: "absolute right-3 top-1/2 -translate-y-1/2 text-[#5a709a] hover:text-[#0d1e4d] transition-colors", children: showPass ? _jsx(EyeOff, { size: 16 }) : _jsx(Eye, { size: 16 }) })] }) }), _jsx(Btn, { type: "submit", fullWidth: true, disabled: loading, children: loading ? _jsxs(_Fragment, { children: [_jsx("div", { className: "w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" }), "Verificando..."] }) : "Iniciar sesión" })] }), _jsxs("p", { className: "mt-4 text-center text-sm text-[#5a709a]", children: ["\u00BFNo tienes cuenta? ", _jsx("button", { onClick: goRegister, className: "text-[#0b3d91] font-semibold hover:underline", children: "Crear cuenta" })] })] })] }) })] }));
 }
 // ─── REGISTER PAGE ───────────────────────────────────────────────
 function RegisterPage({ goLogin }) {
@@ -162,13 +164,14 @@ function RegisterPage({ goLogin }) {
         else if (form.name.trim().split(" ").length < 2)
             e.name = "Ingresa nombre y apellido.";
         
-        if (!form.email.trim())
+        if (!form.email.trim()) {
             e.email = "El correo es requerido.";
-        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
             e.email = "Ingresa un correo válido.";
-        else if (!form.email.toLowerCase().endsWith("@espol.edu.ec"))
-            e.email = "Debes utilizar un correo @espol.edu.ec";
-                
+        } else if (!form.email.toLowerCase().endsWith("@espol.edu.ec")) {
+            e.email = "Debes utilizar un correo @espol.edu.ec.";
+        }
+
         if (!form.pass)
             e.pass = "La contraseña es requerida.";
         else if (form.pass.length < 8)
@@ -429,7 +432,7 @@ function MembersPage({ user, communities, memberships }) {
     }, [selected, communities]);
     const selectedCommunity = communities.find(c => c.id === selected);
     const isAdmin = selectedCommunity ? selectedCommunity.adminId === user.id : false;
-    return (_jsxs(PageWrap, { children: [_jsxs("div", { className: "flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6", children: [_jsxs("div", { children: [_jsx("h1", { className: "text-2xl font-bold text-[#0d1e4d]", style: { fontFamily: "'Outfit', sans-serif" }, children: "Miembros" }), _jsxs("p", { className: "text-sm text-[#5a709a] mt-0.5", children: [members.length, " miembros en esta comunidad"] })] }), _jsx("select", { value: selected, onChange: e => setSelected(Number(e.target.value)), className: cn(inputCls, "sm:w-64"), children: relevantComms.map(c => _jsx("option", { value: c.id, children: c.name }, c.id)) })] }), loading ? _jsx(Card, { className: "p-8 text-sm text-[#5a709a]", children: "Cargando miembros..." }) : members.length === 0 ? _jsx(Empty, { icon: Users, title: "Sin miembros", desc: "Esta comunidad no tiene miembros registrados." }) : (_jsxs(_Fragment, { children: [_jsx("div", { className: "hidden sm:block", children: _jsx(Card, { className: "overflow-hidden", children: _jsxs("table", { className: "w-full", children: [_jsx("thead", { className: "bg-[#f4f7ff]", children: _jsx("tr", { children: ["Miembro", "Correo institucional", "Rol en comunidad", "Fecha de ingreso"].map(h => _jsx("th", { className: "px-5 py-3 text-left text-xs font-semibold text-[#5a709a] uppercase tracking-wide", children: h }, h)) }) }), _jsx("tbody", { className: "divide-y divide-[rgba(11,61,145,0.06)]", children: members.map(m => _jsxs("tr", { className: "hover:bg-[#f8faff] transition-colors", children: [_jsx("td", { className: "px-5 py-4", children: _jsxs("div", { className: "flex items-center gap-3", children: [_jsx(Avatar, { name: m.userName, size: "sm" }), _jsx("span", { className: "text-sm font-medium text-[#0d1e4d]", children: m.userName })] }) }), _jsx("td", { className: "px-5 py-4 text-sm text-[#5a709a]", children: isAdmin ? m.userEmail : "—" }), _jsx("td", { className: "px-5 py-4", children: _jsx("span", { className: cn("px-2.5 py-0.5 rounded-full text-xs font-medium border", m.role === "admin" ? "bg-[#e6eeff] text-[#0b3d91] border-[rgba(11,61,145,0.2)]" : "bg-gray-50 text-gray-600 border-gray-200"), children: m.role === "admin" ? "Administrador" : "Miembro" }) }), _jsx("td", { className: "px-5 py-4 text-sm text-[#5a709a]", children: fmtDate(m.joinedAt) })] }, `${m.communityId}-${m.userId}`)) })] }) }) }), _jsx("div", { className: "sm:hidden space-y-3", children: members.map(m => _jsxs(Card, { className: "p-4 flex items-center gap-3", children: [_jsx(Avatar, { name: m.userName, size: "md" }), _jsxs("div", { className: "flex-1 min-w-0", children: [_jsx("p", { className: "text-sm font-semibold text-[#0d1e4d]", children: m.userName }), isAdmin && _jsx("p", { className: "text-xs text-[#5a709a] truncate", children: m.userEmail }), _jsx("p", { className: "text-xs text-[#5a709a] mt-0.5", children: fmtDate(m.joinedAt) })] }), _jsx("span", { className: cn("px-2 py-0.5 rounded-full text-xs font-medium border shrink-0", m.role === "admin" ? "bg-[#e6eeff] text-[#0b3d91] border-[rgba(11,61,145,0.2)]" : "bg-gray-50 text-gray-600 border-gray-200"), children: m.role === "admin" ? "Admin" : "Miembro" })] }, `${m.communityId}-${m.userId}`)) })] }))] }));
+    return (_jsxs(PageWrap, { children: [_jsxs("div", { className: "flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6", children: [_jsxs("div", { children: [_jsx("h1", { className: "text-2xl font-bold text-[#0d1e4d]", style: { fontFamily: "'Outfit', sans-serif" }, children: "Miembros" }), _jsxs("p", { className: "text-sm text-[#5a709a] mt-0.5", children: [members.length, " miembros en esta comunidad"] })] }), _jsx("select", { value: selected, onChange: e => setSelected(Number(e.target.value)), className: cn(inputCls, "sm:w-64"), children: relevantComms.map(c => _jsx("option", { value: c.id, children: c.name }, c.id)) })] }), loading ? _jsx(Card, { className: "p-8 text-sm text-[#5a709a]", children: "Cargando miembros..." }) : members.length === 0 ? _jsx(Empty, { icon: Users, title: "Sin miembros", desc: "Esta comunidad no tiene miembros registrados." }) : (_jsxs(_Fragment, { children: [_jsx("div", { className: "hidden sm:block", children: _jsx(Card, { className: "overflow-hidden", children: _jsxs("table", { className: "w-full", children: [_jsx("thead", { className: "bg-[#f4f7ff]", children: _jsx("tr", { children: ["Miembro", "Correo electrónico", "Rol en comunidad", "Fecha de ingreso"].map(h => _jsx("th", { className: "px-5 py-3 text-left text-xs font-semibold text-[#5a709a] uppercase tracking-wide", children: h }, h)) }) }), _jsx("tbody", { className: "divide-y divide-[rgba(11,61,145,0.06)]", children: members.map(m => _jsxs("tr", { className: "hover:bg-[#f8faff] transition-colors", children: [_jsx("td", { className: "px-5 py-4", children: _jsxs("div", { className: "flex items-center gap-3", children: [_jsx(Avatar, { name: m.userName, size: "sm" }), _jsx("span", { className: "text-sm font-medium text-[#0d1e4d]", children: m.userName })] }) }), _jsx("td", { className: "px-5 py-4 text-sm text-[#5a709a]", children: isAdmin ? m.userEmail : "—" }), _jsx("td", { className: "px-5 py-4", children: _jsx("span", { className: cn("px-2.5 py-0.5 rounded-full text-xs font-medium border", m.role === "admin" ? "bg-[#e6eeff] text-[#0b3d91] border-[rgba(11,61,145,0.2)]" : "bg-gray-50 text-gray-600 border-gray-200"), children: m.role === "admin" ? "Administrador" : "Miembro" }) }), _jsx("td", { className: "px-5 py-4 text-sm text-[#5a709a]", children: fmtDate(m.joinedAt) })] }, `${m.communityId}-${m.userId}`)) })] }) }) }), _jsx("div", { className: "sm:hidden space-y-3", children: members.map(m => _jsxs(Card, { className: "p-4 flex items-center gap-3", children: [_jsx(Avatar, { name: m.userName, size: "md" }), _jsxs("div", { className: "flex-1 min-w-0", children: [_jsx("p", { className: "text-sm font-semibold text-[#0d1e4d]", children: m.userName }), isAdmin && _jsx("p", { className: "text-xs text-[#5a709a] truncate", children: m.userEmail }), _jsx("p", { className: "text-xs text-[#5a709a] mt-0.5", children: fmtDate(m.joinedAt) })] }), _jsx("span", { className: cn("px-2 py-0.5 rounded-full text-xs font-medium border shrink-0", m.role === "admin" ? "bg-[#e6eeff] text-[#0b3d91] border-[rgba(11,61,145,0.2)]" : "bg-gray-50 text-gray-600 border-gray-200"), children: m.role === "admin" ? "Admin" : "Miembro" })] }, `${m.communityId}-${m.userId}`)) })] }))] }));
 }
 // ─── MY COMMUNITIES ──────────────────────────────────────────────
 function MyCommunitiesPage({ user, communities, memberships, navigate }) {
@@ -472,8 +475,8 @@ function ProfilePage({ user, memberships, communities, onLogout, onUpdateUser, o
             e.name = "Ingresa nombre y apellido.";
         if (!editForm.email.trim())
             e.email = "El correo es requerido.";
-        else if (!editForm.email.toLowerCase().endsWith("@espol.edu.ec"))
-            e.email = "Debes utilizar un correo @espol.edu.ec";
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(editForm.email))
+            e.email = "Ingresa un correo válido.";
         if (!editForm.position.trim())
             e.position = "La posición es requerida.";
         return e;
