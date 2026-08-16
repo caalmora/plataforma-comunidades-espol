@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Community;
+use App\Models\Membership;
 use Illuminate\Http\Request;
+
 
 class CommunityController extends Controller
 {
@@ -30,6 +32,16 @@ class CommunityController extends Controller
             'logo' => $request->logo,
             'created_by' => $request->user()->id,
         ]);
+        
+        Membership::firstOrCreate(
+        [
+            'user_id' => $request->user()->id,
+            'community_id' => $community->id,
+        ],
+        [
+            'joined_at' => now(),
+        ]
+);
 
         return response()->json([
             'mensaje' => 'Comunidad creada correctamente',

@@ -71,4 +71,58 @@ class AuthController extends Controller
             'usuario' => $request->user()
         ]);
     }
+
+    public function updateProfile(Request $request)
+    {
+        $user = $request->user();
+
+        $datos = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'position' => 'nullable|string|max:255',
+        ]);
+
+        $user->update($datos);
+
+        return response()->json([
+            'mensaje' => 'Información actualizada correctamente',
+            'usuario' => $user->fresh(),
+        ]);
+    }
+
+    public function changePassword(Request $request)
+    {
+        $datos = $request->validate([
+            'current_password' => 'required|string',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $user = $request->user();
+
+        if (!Hash::check($datos['current_password'], $user->password)) {
+            return response()->json([
+                'mensaje' => 'La contraseña actual es incorrecta'
+            ], 422);
+        }
+
+        $user->update([
+            'password' => Hash::make($datos['password']),
+        ]);
+
+        return response()->json([
+            'mensaje' => 'Contraseña actualizada correctamente'
+        ]);
+    }
+
+        public function destroyAccount(Request $request)
+    {
+        $user = $request->user();
+
+        $user->delete();
+
+        return response()->json([
+            'mensaje' => 'Cuenta eliminada correctamente'
+        ]);
+    }
+
 }

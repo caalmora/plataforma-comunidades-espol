@@ -67,17 +67,20 @@ class JoinRequestController extends Controller
             ], 404);
         }
 
-        // Solo el creador puede revisar las solicitudes
-        if ($community->created_by !== $request->user()->id) {
-            return response()->json([
-                'mensaje' => 'No tienes permiso para ver las solicitudes'
-            ], 403);
-        }
+       if ($community->created_by === $request->user()->id) {
+            $requests = JoinRequest::with('user')
+                ->where('community_id', $communityId)
+                ->latest()
+                ->get();
 
-        $requests = JoinRequest::with('user')
-            ->where('community_id', $communityId)
-            ->latest()
-            ->get();
+        } else {
+
+            $requests = JoinRequest::with('user')
+                ->where('community_id', $communityId)
+                ->where('user_id', $request->user()->id)
+                ->latest()
+                ->get();
+        }
 
         return response()->json($requests);
     }

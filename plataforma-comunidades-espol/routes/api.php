@@ -17,6 +17,15 @@ Route::post('/logout', [AuthController::class, 'logout'])
 Route::get('/usuario', [AuthController::class, 'usuario'])
     ->middleware('auth:sanctum');
 
+Route::patch('/usuario', [AuthController::class, 'updateProfile'])
+    ->middleware('auth:sanctum');
+
+Route::patch('/usuario/password', [AuthController::class, 'changePassword'])
+    ->middleware('auth:sanctum');
+
+Route::delete('/usuario', [AuthController::class, 'destroyAccount'])
+    ->middleware('auth:sanctum');
+
 
 Route::middleware('auth:sanctum')->group(function () {
 

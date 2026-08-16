@@ -18,6 +18,7 @@ class PublicationController extends Controller
             ], 404);
         }
 
+
         $publications = Publication::with('user')
             ->where('community_id', $communityId)
             ->latest()
@@ -34,6 +35,12 @@ class PublicationController extends Controller
             return response()->json([
                 'mensaje' => 'Comunidad no encontrada'
             ], 404);
+        }
+
+        if ($community->created_by !== $request->user()->id) {
+            return response()->json([
+                'mensaje' => 'No tienes permiso para publicar en esta comunidad'
+            ], 403);
         }
 
         $request->validate([
@@ -81,7 +88,7 @@ class PublicationController extends Controller
             ], 404);
         }
 
-        if ($publication->user_id !== $request->user()->id) {
+        if ($publication->community->created_by !== $request->user()->id) {
             return response()->json([
                 'mensaje' => 'No tienes permiso para modificar esta publicación'
             ], 403);
@@ -113,7 +120,7 @@ class PublicationController extends Controller
             ], 404);
         }
 
-        if ($publication->user_id !== $request->user()->id) {
+        if ($publication->community->created_by !== $request->user()->id) {
             return response()->json([
                 'mensaje' => 'No tienes permiso para eliminar esta publicación'
             ], 403);

@@ -1,36 +1,53 @@
 const API_URL = '/api';
 
+
 function getToken() {
     return localStorage.getItem('token');
 }
 
-function getUser() {
-    const user = localStorage.getItem('usuario');
 
-    if (!user) {
+function getUser() {
+    const usuario = localStorage.getItem('usuario');
+
+    if (!usuario) {
         return null;
     }
 
-    return JSON.parse(user);
+    return JSON.parse(usuario);
 }
+
 
 function saveSession(data) {
-    localStorage.setItem('token', data.token);
-    localStorage.setItem('usuario', JSON.stringify(data.usuario));
+
+    if (data.token) {
+        localStorage.setItem('token', data.token);
+    }
+
+    if (data.usuario) {
+        localStorage.setItem(
+            'usuario',
+            JSON.stringify(data.usuario)
+        );
+    }
 }
 
+
 function clearSession() {
+
     localStorage.removeItem('token');
     localStorage.removeItem('usuario');
 }
 
+
 function authHeaders() {
+
     return {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': 'Bearer ' + getToken()
     };
 }
+
 
 async function logout() {
 
@@ -42,7 +59,9 @@ async function logout() {
         });
 
     } catch (error) {
+
         console.log(error);
+
     }
 
     clearSession();
@@ -50,9 +69,11 @@ async function logout() {
     window.location.href = '/login';
 }
 
+
 function requireAuth() {
 
     if (!getToken()) {
         window.location.href = '/login';
     }
+
 }
