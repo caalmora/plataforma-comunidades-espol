@@ -79,4 +79,12 @@ export const api = {
     rejectRequest: (id) => request(`/solicitudes/${id}/rechazar`, { method: "PATCH" }),
     members: (communityId) => request(`/comunidades/${communityId}/miembros`),
     myCommunities: () => request("/mis-comunidades"),
+    comments: (publicationId) => request(`/publicaciones/${publicationId}/comentarios`),
+    createComment: (publicationId, payload) => request(`/publicaciones/${publicationId}/comentarios`, { method: "POST", body: JSON.stringify(payload) }),
+    updateComment: (id, payload) => request(`/comentarios/${id}`, { method: "PATCH", body: JSON.stringify(payload) }),
+    deleteComment: (id) => request(`/comentarios/${id}`, { method: "DELETE" }),
+    notifications: () => request("/notificaciones"),
+    unreadNotificationCount: () => request("/notificaciones/conteo"),
+    markNotificationRead: (id) => request(`/notificaciones/${id}/leer`, { method: "PATCH" }),
+    markAllNotificationsRead: () => request("/notificaciones/leer-todas", { method: "PATCH" }),
 };

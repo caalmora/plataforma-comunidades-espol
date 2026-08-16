@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Community;
+use App\Models\Membership;
+use App\Models\Notification;
 use App\Models\Publication;
 use Illuminate\Http\Request;
 
@@ -55,6 +57,26 @@ class PublicationController extends Controller
             'content' => $request->content,
             'published_at' => now(),
         ]);
+
+        $memberIds = Membership::where('community_id', $community->id)
+            ->where('user_id', '!=', $request->user()->id)
+            ->pluck('user_id');
+
+        if ($memberIds->isNotEmpty()) {
+            $now = now();
+
+            Notification::insert($memberIds->map(fn ($userId) => [
+                'user_id' => $userId,
+                'type' => 'new_publication',
+                'message' => 'Nueva publicación en "' . $community->name . '": "' . $publication->title . '".',
+                'data' => json_encode([
+                    'community_id' => $community->id,
+                    'publication_id' => $publication->id,
+                ]),
+                'created_at' => $now,
+                'updated_at' => $now,
+            ])->all());
+        }
 
         return response()->json([
             'mensaje' => 'Publicación creada correctamente',

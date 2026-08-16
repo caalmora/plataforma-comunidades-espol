@@ -5,6 +5,8 @@ use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\JoinRequestController;
 use App\Http\Controllers\MembershipController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/registro', [AuthController::class, 'registro']);
@@ -93,5 +95,45 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get(
         '/mis-comunidades',
         [MembershipController::class, 'myCommunities']
+    );
+
+    Route::get(
+        '/publicaciones/{publicationId}/comentarios',
+        [CommentController::class, 'index']
+    );
+
+    Route::post(
+        '/publicaciones/{publicationId}/comentarios',
+        [CommentController::class, 'store']
+    );
+
+    Route::patch(
+        '/comentarios/{id}',
+        [CommentController::class, 'update']
+    );
+
+    Route::delete(
+        '/comentarios/{id}',
+        [CommentController::class, 'destroy']
+    );
+
+    Route::get(
+        '/notificaciones',
+        [NotificationController::class, 'index']
+    );
+
+    Route::get(
+        '/notificaciones/conteo',
+        [NotificationController::class, 'unreadCount']
+    );
+
+    Route::patch(
+        '/notificaciones/{id}/leer',
+        [NotificationController::class, 'markRead']
+    );
+
+    Route::patch(
+        '/notificaciones/leer-todas',
+        [NotificationController::class, 'markAllRead']
     );
 });

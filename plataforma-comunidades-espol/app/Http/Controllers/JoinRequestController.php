@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Community;
 use App\Models\JoinRequest;
 use App\Models\Membership;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 
 class JoinRequestController extends Controller
@@ -119,6 +120,15 @@ class JoinRequestController extends Controller
             'user_id' => $joinRequest->user_id,
             'community_id' => $joinRequest->community_id,
             'joined_at' => now(),
+        ]);
+
+        Notification::create([
+            'user_id' => $joinRequest->user_id,
+            'type' => 'join_request_approved',
+            'message' => 'Tu solicitud para unirte a "' . $community->name . '" fue aprobada.',
+            'data' => [
+                'community_id' => $community->id,
+            ],
         ]);
 
         return response()->json([
