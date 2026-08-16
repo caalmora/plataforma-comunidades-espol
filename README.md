@@ -26,7 +26,7 @@ Las comunidades estudiantiles de ESPOL usan medios dispersos (WhatsApp, Instagra
 ## Arquitectura y tecnologías
 
 - **Patrón:** MVC
-- **Backend:** PHP 8.3 + Laravel 13, Eloquent ORM, Laravel Sanctum (autenticación por tokens)
+- **Backend:** PHP 8.4 + Laravel 13, Eloquent ORM, Laravel Sanctum (autenticación por tokens)
 - **Base de datos:** MySQL (SQLite soportado para desarrollo local)
 - **Frontend:** Blade + HTML + CSS + JavaScript (fetch a la API interna)
 - **API:** REST interna en formato JSON
