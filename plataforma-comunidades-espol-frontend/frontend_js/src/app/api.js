@@ -79,6 +79,7 @@ export const api = {
     rejectRequest: (id) => request(`/solicitudes/${id}/rechazar`, { method: "PATCH" }),
     members: (communityId) => request(`/comunidades/${communityId}/miembros`),
     myCommunities: () => request("/mis-comunidades"),
+    leaveCommunity: (communityId) => request(`/comunidades/${communityId}/salir`, { method: "DELETE" }),
     comments: (publicationId) => request(`/publicaciones/${publicationId}/comentarios`),
     createComment: (publicationId, payload) => request(`/publicaciones/${publicationId}/comentarios`, { method: "POST", body: JSON.stringify(payload) }),
     updateComment: (id, payload) => request(`/comentarios/${id}`, { method: "PATCH", body: JSON.stringify(payload) }),

@@ -97,6 +97,11 @@ Route::middleware('auth:sanctum')->group(function () {
         [MembershipController::class, 'myCommunities']
     );
 
+    Route::delete(
+        '/comunidades/{communityId}/salir',
+        [MembershipController::class, 'leave']
+    );
+
     Route::get(
         '/publicaciones/{publicationId}/comentarios',
         [CommentController::class, 'index']
