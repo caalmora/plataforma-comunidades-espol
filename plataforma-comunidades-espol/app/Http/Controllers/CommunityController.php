@@ -97,7 +97,6 @@ class CommunityController extends Controller
             'logo',
         ]));
 
-
         $memberIds = Membership::where('community_id', $community->id)
             ->where('user_id', '!=', $request->user()->id)
             ->pluck('user_id');
@@ -117,7 +116,7 @@ class CommunityController extends Controller
 
         return response()->json([
             'mensaje' => 'Comunidad actualizada correctamente',
-            'comunidad' => $community->fresh(),
+            'comunidad' => $community,
         ]);
     }
 
