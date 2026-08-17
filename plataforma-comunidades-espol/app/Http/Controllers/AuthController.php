@@ -12,7 +12,7 @@ class AuthController extends Controller
     {
         $datos = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email|ends_with:@espol.edu.ec|unique:users,email',
             'password' => 'required|string|min:8',
         ]);
 
@@ -35,7 +35,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $datos = $request->validate([
-            'email' => 'required|email',
+            'email' => 'required|email|ends_with:@espol.edu.ec',
             'password' => 'required|string',
         ]);
 
@@ -78,7 +78,7 @@ class AuthController extends Controller
 
         $datos = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $user->id,
+            'email' => 'required|email|ends_with:@espol.edu.ec|unique:users,email,' . $user->id,
             'position' => 'nullable|string|max:255',
         ]);
 
