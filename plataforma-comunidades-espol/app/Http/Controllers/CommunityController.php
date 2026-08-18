@@ -87,15 +87,17 @@ class CommunityController extends Controller
             'name' => 'sometimes|required|string|max:255',
             'description' => 'sometimes|required|string',
             'category' => 'sometimes|required|string|max:255',
-            'logo' => 'nullable|string|max:255',
+            'logo' => 'nullable|string',
         ]);
 
-        $community->update($request->only([
-            'name',
-            'description',
-            'category',
-            'logo',
-        ]));
+        $community->update(
+            $request->only([
+                'name',
+                'description',
+                'category',
+                'logo',
+            ])
+        );
 
         $memberIds = Membership::where('community_id', $community->id)
             ->where('user_id', '!=', $request->user()->id)
@@ -104,19 +106,26 @@ class CommunityController extends Controller
         if ($memberIds->isNotEmpty()) {
             $now = now();
 
-            Notification::insert($memberIds->map(fn ($userId) => [
-                'user_id' => $userId,
-                'type' => 'community_update',
-                'message' => 'La comunidad "' . $community->name . '" fue actualizada.',
-                'data' => json_encode(['community_id' => $community->id]),
-                'created_at' => $now,
-                'updated_at' => $now,
-            ])->all());
+            Notification::insert(
+                $memberIds->map(fn ($userId) => [
+                    'user_id' => $userId,
+                    'type' => 'community_update',
+                    'message' =>
+                        'La comunidad "' .
+                        $community->name .
+                        '" fue actualizada.',
+                    'data' => json_encode([
+                        'community_id' => $community->id
+                    ]),
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ])->all()
+            );
         }
 
         return response()->json([
             'mensaje' => 'Comunidad actualizada correctamente',
-            'comunidad' => $community,
+            'comunidad' => $community->fresh('creator'),
         ]);
     }
 

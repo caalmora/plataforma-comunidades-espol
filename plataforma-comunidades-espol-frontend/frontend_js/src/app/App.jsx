@@ -1,7 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 import { useEffect, useState } from "react";
 import { api, clearToken, getToken } from "./api";
-import { Users, LogOut, Search, Plus, Edit2, Trash2, Check, X, Eye, EyeOff, ChevronRight, Menu, FileText, User, Clock, CheckCircle2, XCircle, AlertCircle, Calendar, Home, GraduationCap, UserPlus, ArrowLeft, Filter, Building2, Hash, Camera, KeyRound, Shield, Sun, Moon, Bell, MessageCircle, CornerDownRight, Megaphone } from "lucide-react";
+import { Users, LogOut, Search, Plus, Edit2, Trash2, Check, X, Eye, EyeOff, ChevronRight, Menu, FileText, User, Clock, CheckCircle2, XCircle, AlertCircle, Calendar, Home, GraduationCap, UserPlus, ArrowLeft, Filter, Building2, Hash, KeyRound, Shield, Sun, Moon, Bell, MessageCircle, CornerDownRight, Megaphone } from "lucide-react";
 // ─── LIVE DATA ───────────────────────────────────────────────────
 const CATEGORIES = ["Tecnología", "Deportes", "Arte y Cultura", "Emprendimiento", "Ciencias", "Voluntariado"];
 // ─── UTILITIES ──────────────────────────────────────────────────
@@ -69,9 +69,9 @@ function CommunityLogo({ c, size = "md" }) {
     const sz = { sm: "w-9 h-9 text-sm rounded-lg", md: "w-12 h-12 text-lg rounded-xl", lg: "w-16 h-16 text-xl rounded-2xl", xl: "w-24 h-24 text-3xl rounded-3xl" };
     return (_jsx("div", { className: cn("flex items-center justify-center font-bold text-white shrink-0 shadow-sm", sz[size]), style: { backgroundColor: c.logoColor }, children: c.logoInitial }));
 }
-function Avatar({ name, photo, size = "sm" }) {
+function Avatar({ name, size = "sm" }) {
     const sz = { sm: "w-8 h-8 text-xs", md: "w-10 h-10 text-sm", lg: "w-14 h-14 text-lg" };
-    return (_jsx("div", { className: cn("rounded-full bg-brand-primary flex items-center justify-center font-semibold text-white shrink-0 overflow-hidden", sz[size]), children: photo ? _jsx("img", { src: photo, alt: name, className: "w-full h-full object-cover" }) : initials(name) }));
+    return (_jsx("div", { className: cn("rounded-full bg-brand-primary flex items-center justify-center font-semibold text-white shrink-0 overflow-hidden", sz[size]), children : initials(name) }));
 }
 function ThemeToggle({ dark, onToggle, className = "" }) {
     return (_jsx("button", { type: "button", onClick: onToggle, title: dark ? "Cambiar a modo claro" : "Cambiar a modo oscuro", "aria-label": dark ? "Cambiar a modo claro" : "Cambiar a modo oscuro", className: cn("w-8 h-8 flex items-center justify-center rounded-lg text-brand-muted hover:text-brand-strong hover:bg-brand-muted-bg transition-colors", className), children: dark ? _jsx(Sun, { size: 16 }) : _jsx(Moon, { size: 16 }) }));
@@ -172,7 +172,7 @@ function Navbar({ user, photo, currentView, memberships, navigate, onLogout, dar
         { label: "Perfil", view: "profile", icon: User },
     ];
     const isActive = (v) => currentView === v;
-    return (_jsxs("nav", { className: "sticky top-0 z-40 bg-white dark:bg-brand-card border-b border-brand-border/10 shadow-sm", children: [_jsx("div", { className: "max-w-6xl mx-auto px-4 sm:px-6", children: _jsxs("div", { className: "flex items-center justify-between h-16 gap-4", children: [_jsxs("button", { onClick: () => navigate("dashboard"), className: "flex items-center gap-2.5 shrink-0 group", children: [_jsx("div", { className: "w-9 h-9 rounded-xl bg-brand-primary flex items-center justify-center shadow-sm group-hover:bg-brand-primary-hover transition-colors", children: _jsx(GraduationCap, { size: 18, className: "text-white" }) }), _jsxs("div", { className: "hidden sm:block leading-tight", children: [_jsx("p", { className: "text-base font-bold text-brand-primary", style: { fontFamily: "'Outfit', sans-serif" }, children: "ESPOL" }), _jsx("p", { className: "text-[10px] text-brand-muted font-medium -mt-0.5 leading-none", children: "Comunidades" })] })] }), _jsx("div", { className: "hidden md:flex items-center gap-1", children: links.map(l => (_jsxs("button", { onClick: () => navigate(l.view), className: cn("flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors", isActive(l.view) ? "bg-brand-secondary text-brand-primary" : "text-brand-muted hover:text-brand-strong hover:bg-brand-subtle"), children: [_jsx(l.icon, { size: 15 }), l.label] }, l.view))) }), _jsxs("div", { className: "hidden md:flex items-center gap-3", children: [_jsxs("div", { className: "text-right", children: [_jsx("p", { className: "text-sm font-semibold text-brand-strong leading-tight", children: user.name.split(" ")[0] }), _jsx("p", { className: "text-[11px] text-brand-muted leading-tight", children: user.position })] }), _jsx(Avatar, { name: user.name, photo: photo, size: "sm" }), _jsx(NotificationBell, { notifications: notifications, unreadCount: unreadCount, loading: notifLoading, onOpen: onOpenNotifications, onMarkRead: onMarkNotifRead, onMarkAllRead: onMarkAllNotifRead }), _jsx(ThemeToggle, { dark: dark, onToggle: onToggleDark }), _jsx("button", { onClick: onLogout, title: "Cerrar sesi\u00F3n", className: "w-8 h-8 flex items-center justify-center rounded-lg text-brand-muted hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors", children: _jsx(LogOut, { size: 16 }) })] }), _jsx("button", { onClick: () => setOpen(v => !v), className: "md:hidden w-9 h-9 flex items-center justify-center rounded-lg text-brand-muted hover:bg-brand-subtle transition-colors", children: open ? _jsx(X, { size: 20 }) : _jsx(Menu, { size: 20 }) })] }) }), open && (_jsx("div", { className: "md:hidden border-t border-brand-border/8 bg-white dark:bg-brand-card", children: _jsxs("div", { className: "px-4 py-3 space-y-1", children: [links.map(l => (_jsxs("button", { onClick: () => { navigate(l.view); setOpen(false); }, className: cn("w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors", isActive(l.view) ? "bg-brand-secondary text-brand-primary" : "text-brand-muted hover:bg-brand-subtle hover:text-brand-strong"), children: [_jsx(l.icon, { size: 16 }), l.label] }, l.view))), _jsxs("div", { className: "pt-2 mt-2 border-t border-brand-border/8 flex items-center justify-between", children: [_jsxs("div", { className: "flex items-center gap-2", children: [_jsx(Avatar, { name: user.name, photo: photo, size: "sm" }), _jsxs("div", { children: [_jsx("p", { className: "text-sm font-semibold text-brand-strong", children: user.name.split(" ").slice(0, 2).join(" ") }), _jsx("p", { className: "text-xs text-brand-muted", children: user.email })] })] }), _jsxs("div", { className: "flex items-center gap-1", children: [_jsx(NotificationBell, { notifications: notifications, unreadCount: unreadCount, loading: notifLoading, onOpen: onOpenNotifications, onMarkRead: onMarkNotifRead, onMarkAllRead: onMarkAllNotifRead }), _jsx(ThemeToggle, { dark: dark, onToggle: onToggleDark }), _jsxs("button", { onClick: onLogout, className: "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors", children: [_jsx(LogOut, { size: 13 }), "Salir"] })] })] })] }) }))] }));
+    return (_jsxs("nav", { className: "sticky top-0 z-40 bg-white dark:bg-brand-card border-b border-brand-border/10 shadow-sm", children: [_jsx("div", { className: "max-w-6xl mx-auto px-4 sm:px-6", children: _jsxs("div", { className: "flex items-center justify-between h-16 gap-4", children: [_jsxs("button", { onClick: () => navigate("dashboard"), className: "flex items-center gap-2.5 shrink-0 group", children: [_jsx("div", { className: "w-9 h-9 rounded-xl bg-brand-primary flex items-center justify-center shadow-sm group-hover:bg-brand-primary-hover transition-colors", children: _jsx(GraduationCap, { size: 18, className: "text-white" }) }), _jsxs("div", { className: "hidden sm:block leading-tight", children: [_jsx("p", { className: "text-base font-bold text-brand-primary", style: { fontFamily: "'Outfit', sans-serif" }, children: "ESPOL" }), _jsx("p", { className: "text-[10px] text-brand-muted font-medium -mt-0.5 leading-none", children: "Comunidades" })] })] }), _jsx("div", { className: "hidden md:flex items-center gap-1", children: links.map(l => (_jsxs("button", { onClick: () => navigate(l.view), className: cn("flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors", isActive(l.view) ? "bg-brand-secondary text-brand-primary" : "text-brand-muted hover:text-brand-strong hover:bg-brand-subtle"), children: [_jsx(l.icon, { size: 15 }), l.label] }, l.view))) }), _jsxs("div", { className: "hidden md:flex items-center gap-3", children: [_jsxs("div", { className: "text-right", children: [_jsx("p", { className: "text-sm font-semibold text-brand-strong leading-tight", children: user.name.split(" ")[0] }), _jsx("p", { className: "text-[11px] text-brand-muted leading-tight", children: user.position })] }), _jsx(Avatar, { name: user.name, size: "sm" }), _jsx(NotificationBell, { notifications: notifications, unreadCount: unreadCount, loading: notifLoading, onOpen: onOpenNotifications, onMarkRead: onMarkNotifRead, onMarkAllRead: onMarkAllNotifRead }), _jsx(ThemeToggle, { dark: dark, onToggle: onToggleDark }), _jsx("button", { onClick: onLogout, title: "Cerrar sesi\u00F3n", className: "w-8 h-8 flex items-center justify-center rounded-lg text-brand-muted hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors", children: _jsx(LogOut, { size: 16 }) })] }), _jsx("button", { onClick: () => setOpen(v => !v), className: "md:hidden w-9 h-9 flex items-center justify-center rounded-lg text-brand-muted hover:bg-brand-subtle transition-colors", children: open ? _jsx(X, { size: 20 }) : _jsx(Menu, { size: 20 }) })] }) }), open && (_jsx("div", { className: "md:hidden border-t border-brand-border/8 bg-white dark:bg-brand-card", children: _jsxs("div", { className: "px-4 py-3 space-y-1", children: [links.map(l => (_jsxs("button", { onClick: () => { navigate(l.view); setOpen(false); }, className: cn("w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors", isActive(l.view) ? "bg-brand-secondary text-brand-primary" : "text-brand-muted hover:bg-brand-subtle hover:text-brand-strong"), children: [_jsx(l.icon, { size: 16 }), l.label] }, l.view))), _jsxs("div", { className: "pt-2 mt-2 border-t border-brand-border/8 flex items-center justify-between", children: [_jsxs("div", { className: "flex items-center gap-2", children: [_jsx(Avatar, { name: user.name, photo: photo, size: "sm" }), _jsxs("div", { children: [_jsx("p", { className: "text-sm font-semibold text-brand-strong", children: user.name.split(" ").slice(0, 2).join(" ") }), _jsx("p", { className: "text-xs text-brand-muted", children: user.email })] })] }), _jsxs("div", { className: "flex items-center gap-1", children: [_jsx(NotificationBell, { notifications: notifications, unreadCount: unreadCount, loading: notifLoading, onOpen: onOpenNotifications, onMarkRead: onMarkNotifRead, onMarkAllRead: onMarkAllNotifRead }), _jsx(ThemeToggle, { dark: dark, onToggle: onToggleDark }), _jsxs("button", { onClick: onLogout, className: "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors", children: [_jsx(LogOut, { size: 13 }), "Salir"] })] })] })] }) }))] }));
 }
 // ─── LOGIN PAGE ──────────────────────────────────────────────────
 function LoginPage({ onLogin, goRegister }) {
@@ -292,7 +292,7 @@ function DashboardPage({ user, communities, publications, memberships, navigate,
                             if (!c)
                                 return null;
                             const pending = requests.filter(r => r.communityId === c.id && r.status === "pending").length;
-                            return (_jsxs(Card, { className: "p-4 flex items-center gap-3 hover:shadow-md transition-shadow cursor-pointer", onClick: () => navigate("community-detail", c.id), children: [_jsx(CommunityLogo, { c: c, size: "sm" }), _jsxs("div", { className: "flex-1 min-w-0", children: [_jsx("p", { className: "text-sm font-semibold text-brand-strong truncate", children: c.name }), _jsxs("div", { className: "flex items-center gap-2 mt-0.5", children: [_jsxs("span", { className: "inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full text-[10px] font-medium bg-brand-secondary text-brand-primary border border-brand-border/20", children: [_jsx(Shield, { size: 9 }), "Admin"] }), pending > 0 && (_jsxs("span", { className: "inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full text-[10px] font-medium bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800/50", children: [_jsx(Clock, { size: 9 }), pending, " pendiente", pending > 1 ? "s" : ""] }))] })] }), _jsx(ChevronRight, { size: 15, className: "text-brand-muted shrink-0" })] }, c.id));
+                            return (_jsxs(Card, { className: "p-4 flex items-center gap-3 hover:shadow-md transition-shadow cursor-pointer", onClick: () => navigate("community-detail", c.id), children: [_jsx(CommunityLogo, { c: c, size: "sm" }), _jsxs("div", { className: "flex-1 min-w-0", children: [_jsx("p", { className: "text-sm font-semibold text-brand-strong truncate", children: c.name }), _jsxs("div", { className: "flex items-center gap-2 mt-0.5", children: [_jsxs("span", { className: "inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full text-[10px] font-medium bg-brand-secondary text-brand-primary border border-brand-border/20", children: [_jsx(Shield, { size: 9 }), "Admin"] }), pending > 0 && (_jsxs("span", { className: "inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full text-[10px] font-medium bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800/50", children: [_jsx(Clock, { size: 9 }), pending, " pendiente", pending > 1 ? "s" : ""] }))] })] })] }, c.id));
                         }) })] })), _jsxs("div", { children: [_jsxs("div", { className: "flex items-center justify-between mb-4", children: [_jsx("h2", { className: "text-lg font-bold text-brand-strong", style: { fontFamily: "'Outfit', sans-serif" }, children: "Publicaciones recientes" }), _jsxs("button", { onClick: () => navigate("publications"), className: "text-sm text-brand-primary font-medium hover:underline flex items-center gap-1", children: ["Ver todas ", _jsx(ChevronRight, { size: 14 })] })] }), recentPubs.length === 0 ? (_jsx(Card, { className: "p-6", children: _jsx(Empty, { icon: FileText, title: "Sin publicaciones", desc: "No hay publicaciones recientes." }) })) : (_jsx("div", { className: "grid sm:grid-cols-2 lg:grid-cols-3 gap-4", children: recentPubs.map(p => (_jsxs(Card, { className: "p-4 hover:shadow-md transition-shadow", children: [_jsx("div", { className: "flex items-center gap-2 mb-2", children: _jsx("span", { className: "text-xs font-medium px-2 py-0.5 rounded-full bg-brand-secondary text-brand-primary truncate max-w-[140px]", children: p.communityName }) }), _jsx("p", { className: "text-sm font-semibold text-brand-strong mb-1 line-clamp-2", children: p.title }), _jsx("p", { className: "text-xs text-brand-muted line-clamp-2 mb-3", children: p.content }), _jsxs("div", { className: "flex items-center justify-between pt-2 border-t border-brand-border/6", children: [_jsx("span", { className: "text-xs text-brand-muted", children: p.authorName.split(" ")[0] }), _jsxs("span", { className: "text-xs text-brand-muted flex items-center gap-1", children: [_jsx(Calendar, { size: 10 }), fmtDate(p.createdAt)] })] })] }, p.id))) }))] })] }));
 }
 // ─── COMMUNITIES PAGE ────────────────────────────────────────────
@@ -515,7 +515,6 @@ function MyCommunitiesPage({ user, communities, memberships, navigate, onLeaveCo
 }
 // ─── PROFILE PAGE ────────────────────────────────────────────────
 function ProfilePage({ user, memberships, communities, onLogout, onUpdateUser, onDeleteAccount, toast, showConfirm }) {
-    const [photo, setPhoto] = useState(null);
     const [editingInfo, setEditingInfo] = useState(false);
     const [editForm, setEditForm] = useState({ name: user.name, email: user.email, position: user.position });
     const [editErrors, setEditErrors] = useState({});
@@ -528,13 +527,7 @@ function ProfilePage({ user, memberships, communities, onLogout, onUpdateUser, o
     const myMems = memberships.filter(m => m.userId === user.id);
     const adminMems = myMems.filter(m => m.role === "admin");
     const memberMems = myMems.filter(m => m.role === "member");
-    const handlePhotoChange = (e) => {
-        const file = e.target.files?.[0];
-        if (file) {
-            setPhoto(URL.createObjectURL(file));
-            toast("success", "Foto de perfil actualizada.");
-        }
-    };
+    
     const validateInfo = () => {
         const e = {};
         if (!editForm.name.trim())
@@ -595,9 +588,20 @@ function ProfilePage({ user, memberships, communities, onLogout, onUpdateUser, o
         setEditErrors({});
         setEditForm({ name: user.name, email: user.email, position: user.position });
     };
-    return (_jsxs(PageWrap, { children: [_jsx("h1", { className: "text-2xl font-bold text-brand-strong mb-6", style: { fontFamily: "'Outfit', sans-serif" }, children: "Mi perfil" }), _jsxs("div", { className: "max-w-2xl mx-auto space-y-5", children: [_jsx(Card, { className: "p-6", children: _jsxs("div", { className: "flex flex-col sm:flex-row items-center sm:items-start gap-5", children: [_jsxs("div", { className: "relative shrink-0", children: [_jsx("div", { className: "w-24 h-24 rounded-full overflow-hidden bg-brand-primary flex items-center justify-center shadow-lg border-4 border-white dark:border-brand-secondary", children: photo
-                                                ? _jsx("img", { src: photo, alt: "Foto de perfil", className: "w-full h-full object-cover" })
-                                                : _jsx("span", { className: "text-2xl font-bold text-white", children: initials(user.name) }) }), _jsxs("label", { htmlFor: "photo-upload", className: "absolute -bottom-1 -right-1 w-8 h-8 bg-brand-primary rounded-full flex items-center justify-center cursor-pointer hover:bg-brand-primary-hover transition-colors shadow-md border-2 border-white dark:border-brand-secondary", title: "Cambiar foto de perfil", children: [_jsx(Camera, { size: 14, className: "text-white" }), _jsx("input", { id: "photo-upload", type: "file", accept: "image/png,image/jpeg,image/webp", className: "hidden", onChange: handlePhotoChange })] })] }), _jsxs("div", { className: "flex-1 text-center sm:text-left", children: [_jsx("h2", { className: "text-xl font-bold text-brand-strong", style: { fontFamily: "'Outfit', sans-serif" }, children: user.name }), _jsx("p", { className: "text-sm text-brand-muted mt-0.5", children: user.email }), _jsx("p", { className: "text-sm text-brand-muted mt-0.5 font-medium", children: user.position }), _jsxs("div", { className: "flex flex-wrap justify-center sm:justify-start gap-2 mt-2.5", children: [adminMems.length > 0 && (_jsxs("span", { className: "inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-brand-secondary text-brand-primary border border-brand-border/20", children: [_jsx(Shield, { size: 11 }), "Admin de ", adminMems.length, " comunidad", adminMems.length > 1 ? "es" : ""] })), _jsxs("span", { className: "inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-green-50 dark:bg-green-950/30 text-green-700 dark:text-green-300 border border-green-200 dark:border-green-800/50", children: [_jsx(Users, { size: 11 }), "Miembro de ", myMems.length, " comunidad", myMems.length !== 1 ? "es" : ""] })] }), _jsxs("p", { className: "text-xs text-brand-muted mt-2 flex items-center gap-1 justify-center sm:justify-start", children: [_jsx(Calendar, { size: 11 }), "En ESPOL Comunidades desde ", fmtDate(user.joinedAt)] })] })] }) }), _jsxs(Card, { className: "p-6", children: [_jsxs("div", { className: "flex items-center justify-between mb-5", children: [_jsx("h3", { className: "text-base font-bold text-brand-strong", style: { fontFamily: "'Outfit', sans-serif" }, children: "Informaci\u00F3n de cuenta" }), !editingInfo ? (_jsxs(Btn, { size: "sm", variant: "outline", onClick: () => setEditingInfo(true), children: [_jsx(Edit2, { size: 13 }), "Editar"] })) : (_jsxs("div", { className: "flex gap-2", children: [_jsx(Btn, { size: "sm", disabled: savingInfo, onClick: saveInfo, children: savingInfo ? _jsxs(_Fragment, { children: [_jsx("div", { className: "w-3 h-3 border-2 border-white/40 border-t-white rounded-full animate-spin" }), "Guardando..."] }) : _jsxs(_Fragment, { children: [_jsx(Check, { size: 13 }), "Guardar"] }) }), _jsxs(Btn, { size: "sm", variant: "outline", onClick: cancelEdit, children: [_jsx(X, { size: 13 }), "Cancelar"] })] }))] }), editingInfo ? (_jsxs("div", { className: "space-y-4", children: [_jsx(FieldWrap, { label: "Nombre completo", error: editErrors.name, children: _jsx(Inp, { value: editForm.name, onChange: e => { setEditForm(f => ({ ...f, name: e.target.value })); setEditErrors(p => ({ ...p, name: "" })); } }) }), _jsx(FieldWrap, { label: "Correo electr\u00F3nico institucional", error: editErrors.email, children: _jsx(Inp, { type: "email", value: editForm.email, onChange: e => { setEditForm(f => ({ ...f, email: e.target.value })); setEditErrors(p => ({ ...p, email: "" })); } }) }), _jsx(FieldWrap, { label: "Posici\u00F3n / Estado", error: editErrors.position, hint: "Ej: Estudiante de Computaci\u00F3n, Graduado, Docente...", children: _jsx(Inp, { placeholder: "Tu posici\u00F3n en ESPOL", value: editForm.position, onChange: e => { setEditForm(f => ({ ...f, position: e.target.value })); setEditErrors(p => ({ ...p, position: "" })); } }) })] })) : (_jsx("div", { className: "space-y-0", children: [
+    return (_jsxs(PageWrap, { children: [_jsx("h1", { className: "text-2xl font-bold text-brand-strong mb-6", style: { fontFamily: "'Outfit', sans-serif" }, children: "Mi perfil" }), _jsxs("div", { className: "max-w-2xl mx-auto space-y-5", children: [_jsx(Card, { className: "p-6", children: _jsxs("div", { className: "flex flex-col sm:flex-row items-center sm:items-start gap-5", children: [
+        
+        _jsxs("div", {
+            className: "relative shrink-0",
+            children: [
+                _jsx("div", {
+                    className: "w-24 h-24 rounded-full overflow-hidden bg-brand-primary flex items-center justify-center shadow-lg border-4 border-white dark:border-brand-secondary",
+                    children: _jsx("span", {
+                        className: "text-2xl font-bold text-white",
+                        children: initials(user.name)
+                    })
+                })
+            ]
+        }) , _jsxs("div", { className: "flex-1 text-center sm:text-left", children: [_jsx("h2", { className: "text-xl font-bold text-brand-strong", style: { fontFamily: "'Outfit', sans-serif" }, children: user.name }), _jsx("p", { className: "text-sm text-brand-muted mt-0.5", children: user.email }), _jsx("p", { className: "text-sm text-brand-muted mt-0.5 font-medium", children: user.position }), _jsxs("div", { className: "flex flex-wrap justify-center sm:justify-start gap-2 mt-2.5", children: [adminMems.length > 0 && (_jsxs("span", { className: "inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-brand-secondary text-brand-primary border border-brand-border/20", children: [_jsx(Shield, { size: 11 }), "Admin de ", adminMems.length, " comunidad", adminMems.length > 1 ? "es" : ""] })), _jsxs("span", { className: "inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-green-50 dark:bg-green-950/30 text-green-700 dark:text-green-300 border border-green-200 dark:border-green-800/50", children: [_jsx(Users, { size: 11 }), "Miembro de ", myMems.length, " comunidad", myMems.length !== 1 ? "es" : ""] })] }), _jsxs("p", { className: "text-xs text-brand-muted mt-2 flex items-center gap-1 justify-center sm:justify-start", children: [_jsx(Calendar, { size: 11 }), "En ESPOL Comunidades desde ", fmtDate(user.joinedAt)] })] })] }) }), _jsxs(Card, { className: "p-6", children: [_jsxs("div", { className: "flex items-center justify-between mb-5", children: [_jsx("h3", { className: "text-base font-bold text-brand-strong", style: { fontFamily: "'Outfit', sans-serif" }, children: "Informaci\u00F3n de cuenta" }), !editingInfo ? (_jsxs(Btn, { size: "sm", variant: "outline", onClick: () => setEditingInfo(true), children: [_jsx(Edit2, { size: 13 }), "Editar"] })) : (_jsxs("div", { className: "flex gap-2", children: [_jsx(Btn, { size: "sm", disabled: savingInfo, onClick: saveInfo, children: savingInfo ? _jsxs(_Fragment, { children: [_jsx("div", { className: "w-3 h-3 border-2 border-white/40 border-t-white rounded-full animate-spin" }), "Guardando..."] }) : _jsxs(_Fragment, { children: [_jsx(Check, { size: 13 }), "Guardar"] }) }), _jsxs(Btn, { size: "sm", variant: "outline", onClick: cancelEdit, children: [_jsx(X, { size: 13 }), "Cancelar"] })] }))] }), editingInfo ? (_jsxs("div", { className: "space-y-4", children: [_jsx(FieldWrap, { label: "Nombre completo", error: editErrors.name, children: _jsx(Inp, { value: editForm.name, onChange: e => { setEditForm(f => ({ ...f, name: e.target.value })); setEditErrors(p => ({ ...p, name: "" })); } }) }), _jsx(FieldWrap, { label: "Posici\u00F3n / Estado", error: editErrors.position, hint: "Ej: Estudiante de Computaci\u00F3n, Graduado, Docente...", children: _jsx(Inp, { placeholder: "Tu posici\u00F3n en ESPOL", value: editForm.position, onChange: e => { setEditForm(f => ({ ...f, position: e.target.value })); setEditErrors(p => ({ ...p, position: "" })); } }) })] })) : (_jsx("div", { className: "space-y-0", children: [
                                     { label: "Nombre completo", value: user.name },
                                     { label: "Correo institucional", value: user.email },
                                     { label: "Posición", value: user.position },
@@ -607,7 +611,6 @@ function ProfilePage({ user, memberships, communities, onLogout, onUpdateUser, o
 export default function App() {
     const [view, setView] = useState("login");
     const [user, setUser] = useState(null);
-    const [photo, setPhoto] = useState(null);
     const [selCommunityId, setSelCommunityId] = useState(null);
     const [selPubId, setSelPubId] = useState(null);
     const [communities, setCommunities] = useState([]);
@@ -694,12 +697,40 @@ export default function App() {
     const mapUser = (u) => ({
         id: u.id, name: u.name, email: u.email, position: u.position || "Estudiante", joinedAt: u.created_at || new Date().toISOString()
     });
-    const mapCommunity = (c) => ({
-        id: c.id, name: c.name, description: c.description, category: c.category,
-        adminId: c.created_by, adminName: c.creator?.name || "Administrador",
-        memberCount: 0, logoColor: categoryColor(c.category), logoInitial: initials(c.name),
-        createdAt: c.created_at || new Date().toISOString()
-    });
+    
+    const mapCommunity = (c) => {
+        let logoInitial = initials(c.name);
+        let logoColor = categoryColor(c.category);
+
+        if (c.logo) {
+            try {
+                const logo = JSON.parse(c.logo);
+
+                logoInitial = logo.initial || logoInitial;
+                logoColor = logo.color || logoColor;
+            } catch {
+                // Compatible con comunidades antiguas
+                logoInitial = c.logo || logoInitial;
+            }
+        }
+
+        return {
+            id: c.id,
+            name: c.name,
+            description: c.description,
+            category: c.category,
+            adminId: c.created_by,
+            adminName: c.creator?.name || "Administrador",
+            memberCount: 0,
+            logoColor,
+            logoInitial,
+            createdAt:
+                c.created_at ||
+                new Date().toISOString(),
+        };
+    };
+
+
     const loadData = async (currentUser) => {
         const [communityData, myCommsData] = await Promise.all([api.communities(), api.myCommunities()]);
         const mappedCommunities = (communityData || []).map(mapCommunity);
@@ -818,29 +849,86 @@ export default function App() {
             toast("error", error?.message || "No fue posible eliminar la publicación.");
         }
     });
+    
     const handleSaveCommunity = async (data, editing) => {
         try {
+            const payload = {
+                name: data.name.trim(),
+                description: data.description.trim(),
+                category: data.category,
+                logo: JSON.stringify({
+                    initial: data.logoInitial,
+                    color: data.logoColor,
+                }),
+            };
+
             if (editing && selCommunityId) {
-                const updated = await api.updateCommunity(selCommunityId, { name: data.name, description: data.description, category: data.category, logo: data.logo || null });
-                setCommunities(p => p.map(c => c.id === selCommunityId ? { ...c, ...mapCommunity(updated.comunidad || updated) } : c));
-                toast("success", "Comunidad actualizada correctamente.");
-            }
-            else {
-                const created = await api.createCommunity({ name: data.name, description: data.description, category: data.category, logo: data.logo || null });
-                const mapped = mapCommunity(created.comunidad || created);
+                const updated = await api.updateCommunity(
+                    selCommunityId,
+                    payload
+                );
+
+                const mapped = mapCommunity(
+                    updated.comunidad || updated
+                );
+
+                setCommunities((prev) =>
+                    prev.map((c) =>
+                        c.id === selCommunityId
+                            ? {
+                                ...c,
+                                ...mapped,
+                            }
+                            : c
+                    )
+                );
+
+                toast(
+                    "success",
+                    "Comunidad actualizada correctamente."
+                );
+            } else {
+                const created = await api.createCommunity(payload);
+
+                const mapped = mapCommunity(
+                    created.comunidad || created
+                );
+
                 mapped.memberCount = 1;
                 mapped.adminId = user.id;
                 mapped.adminName = user.name;
-                setCommunities(p => [...p, mapped]);
-                setMemberships(p => [...p, { userId: user.id, communityId: mapped.id, role: "admin", joinedAt: mapped.createdAt }]);
-                toast("success", "Comunidad creada. ¡Ahora eres su administrador!");
+
+                setCommunities((prev) => [
+                    ...prev,
+                    mapped,
+                ]);
+
+                setMemberships((prev) => [
+                    ...prev,
+                    {
+                        userId: user.id,
+                        communityId: mapped.id,
+                        role: "admin",
+                        joinedAt: mapped.createdAt,
+                    },
+                ]);
+
+                toast(
+                    "success",
+                    "Comunidad creada. ¡Ahora eres su administrador!"
+                );
             }
+
             navigate("communities");
-        }
-        catch (error) {
-            toast("error", error?.message || "No fue posible guardar la comunidad.");
+        } catch (error) {
+            toast(
+                "error",
+                error?.message ||
+                "No fue posible guardar la comunidad."
+            );
         }
     };
+
     const handleSavePublication = async (data, editing) => {
         try {
             if (editing && selPubId) {
@@ -867,5 +955,5 @@ export default function App() {
             return _jsxs(_Fragment, { children: [themeOverlay, _jsx(RegisterPage, { goLogin: () => setView("login") })] });
         return _jsxs(_Fragment, { children: [themeOverlay, _jsx(LoginPage, { onLogin: handleLogin, goRegister: () => setView("register") })] });
     }
-    return (_jsxs("div", { className: "min-h-screen bg-brand-subtle", style: { fontFamily: "'Inter', sans-serif" }, children: [_jsx("style", { children: `h1,h2,h3,h4 { font-family:'Outfit',sans-serif; } * { scrollbar-width:thin; scrollbar-color:rgba(11,61,145,0.2) transparent; }` }), _jsx(Navbar, { user: user, photo: photo, currentView: view, memberships: memberships, navigate: (v) => navigate(v), onLogout: handleLogout, dark: dark, onToggleDark: toggleDark, notifications: notifications, unreadCount: unreadCount, notifLoading: notifLoading, onOpenNotifications: loadNotifications, onMarkNotifRead: handleMarkNotifRead, onMarkAllNotifRead: handleMarkAllNotifRead }), _jsxs("main", { children: [view === "dashboard" && _jsx(DashboardPage, { user: user, communities: communities, publications: publications, memberships: memberships, navigate: navigate, requests: requests }), view === "communities" && _jsx(CommunitiesPage, { user: user, communities: communities, memberships: memberships, navigate: navigate, onDelete: handleDeleteCommunity, onJoinRequest: handleJoinRequest, toast: toast }), view === "community-detail" && _jsx(CommunityDetailPage, { user: user, communities: communities, publications: publications, memberships: memberships, selectedId: selCommunityId, navigate: navigate, onJoinRequest: handleJoinRequest, onDeletePub: handleDeletePublication, onLeaveCommunity: handleLeaveCommunity, requests: requests, toast: toast }), (view === "create-community" || view === "edit-community") && _jsx(CreateCommunityPage, { navigate: navigate, onSave: handleSaveCommunity, existingId: view === "edit-community" ? selCommunityId : null, communities: communities }), view === "publications" && _jsx(PublicationsPage, { user: user, publications: publications, communities: communities, memberships: memberships, navigate: navigate, onDelete: handleDeletePublication, selectedCommunityId: selCommunityId }), (view === "create-publication" || view === "edit-publication") && _jsx(CreatePublicationPage, { user: user, navigate: navigate, onSave: handleSavePublication, publications: publications, communities: communities, memberships: memberships, selectedPubId: view === "edit-publication" ? selPubId : null, selectedCommunityId: selCommunityId }), view === "requests" && isAdminOfAny(user.id, memberships) && _jsx(RequestsPage, { user: user, requests: requests, memberships: memberships, setRequests: setRequests, toast: toast }), view === "members" && _jsx(MembersPage, { user: user, communities: communities, memberships: memberships }), view === "my-communities" && _jsx(MyCommunitiesPage, { user: user, communities: communities, memberships: memberships, navigate: navigate, onLeaveCommunity: handleLeaveCommunity }), view === "profile" && _jsx(ProfilePage, { user: user, memberships: memberships, communities: communities, onLogout: handleLogout, onUpdateUser: handleUpdateUser, onDeleteAccount: handleDeleteAccount, toast: toast, showConfirm: showConfirm })] }), _jsx(ToastRack, { toasts: toasts }), confirm && _jsx(ConfirmModal, { msg: confirm.msg, onOk: confirm.onOk, onCancel: () => setConfirm(null) })] }));
+    return (_jsxs("div", { className: "min-h-screen bg-brand-subtle", style: { fontFamily: "'Inter', sans-serif" }, children: [_jsx("style", { children: `h1,h2,h3,h4 { font-family:'Outfit',sans-serif; } * { scrollbar-width:thin; scrollbar-color:rgba(11,61,145,0.2) transparent; }` }), _jsx(Navbar, { user: user, currentView: view, memberships: memberships, navigate: (v) => navigate(v), onLogout: handleLogout, dark: dark, onToggleDark: toggleDark, notifications: notifications, unreadCount: unreadCount, notifLoading: notifLoading, onOpenNotifications: loadNotifications, onMarkNotifRead: handleMarkNotifRead, onMarkAllNotifRead: handleMarkAllNotifRead }), _jsxs("main", { children: [view === "dashboard" && _jsx(DashboardPage, { user: user, communities: communities, publications: publications, memberships: memberships, navigate: navigate, requests: requests }), view === "communities" && _jsx(CommunitiesPage, { user: user, communities: communities, memberships: memberships, navigate: navigate, onDelete: handleDeleteCommunity, onJoinRequest: handleJoinRequest, toast: toast }), view === "community-detail" && _jsx(CommunityDetailPage, { user: user, communities: communities, publications: publications, memberships: memberships, selectedId: selCommunityId, navigate: navigate, onJoinRequest: handleJoinRequest, onDeletePub: handleDeletePublication, onLeaveCommunity: handleLeaveCommunity, requests: requests, toast: toast }), (view === "create-community" || view === "edit-community") && _jsx(CreateCommunityPage, { navigate: navigate, onSave: handleSaveCommunity, existingId: view === "edit-community" ? selCommunityId : null, communities: communities }), view === "publications" && _jsx(PublicationsPage, { user: user, publications: publications, communities: communities, memberships: memberships, navigate: navigate, onDelete: handleDeletePublication, selectedCommunityId: selCommunityId }), (view === "create-publication" || view === "edit-publication") && _jsx(CreatePublicationPage, { user: user, navigate: navigate, onSave: handleSavePublication, publications: publications, communities: communities, memberships: memberships, selectedPubId: view === "edit-publication" ? selPubId : null, selectedCommunityId: selCommunityId }), view === "requests" && isAdminOfAny(user.id, memberships) && _jsx(RequestsPage, { user: user, requests: requests, memberships: memberships, setRequests: setRequests, toast: toast }), view === "members" && _jsx(MembersPage, { user: user, communities: communities, memberships: memberships }), view === "my-communities" && _jsx(MyCommunitiesPage, { user: user, communities: communities, memberships: memberships, navigate: navigate, onLeaveCommunity: handleLeaveCommunity }), view === "profile" && _jsx(ProfilePage, { user: user, memberships: memberships, communities: communities, onLogout: handleLogout, onUpdateUser: handleUpdateUser, onDeleteAccount: handleDeleteAccount, toast: toast, showConfirm: showConfirm })] }), _jsx(ToastRack, { toasts: toasts }), confirm && _jsx(ConfirmModal, { msg: confirm.msg, onOk: confirm.onOk, onCancel: () => setConfirm(null) })] }));
 }
